@@ -5,8 +5,38 @@ from pydantic import BaseModel
 from datetime import datetime
 from typing import List
 
+
+description = """
+This service was developed in accordance with the assignment of the
+DevOps course during study at [HSE Master's Programme](https://www.hse.ru/en/ma/mlds/).
+
+## Available operations
+
+In this app you can:
+1. Create a new timestamp;
+2. Create a new dog;
+3. Get a list of all dogs;
+4. Get a dog by its pk;
+5. Update a dog by its pk;
+6. Get a list of dogs by selected breed.
+"""
+
+
+tags = [
+    {
+        "name": "Available operations"
+    }
+]
+
+
 app = FastAPI(
-    title="Vet Service Clinic"
+    title="Vet Service Clinic",
+    description=description,
+    openapi_tags=tags,
+    contact={
+        'name': "Astashov I. V.",
+        'url': "https://github.com/igorastashov/web-service"
+    }
 )
 
 
