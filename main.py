@@ -1,10 +1,10 @@
+import uvicorn
 from enum import Enum
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
 from datetime import datetime
 from typing import List
-
 
 description = """
 This service was developed in accordance with the assignment of the
@@ -13,21 +13,21 @@ DevOps course during study at [HSE Master's Programme](https://www.hse.ru/en/ma/
 ## Available operations
 
 In this app you can:
+0. See basic information about the app;
 1. Create a new timestamp;
 2. Create a new dog;
 3. Get a list of all dogs;
 4. Get a dog by its pk;
 5. Update a dog by its pk;
-6. Get a list of dogs by selected breed.
+5. Get a list of dogs by breed;
+6. Update a dog by its pk;.
 """
-
 
 tags = [
     {
         "name": "Available operations"
     }
 ]
-
 
 app = FastAPI(
     title="Vet Service Clinic",
@@ -73,65 +73,73 @@ post_db = [
 ]
 
 
-# 2. Реализован путь /
-@app.get("/")
+@app.get("/", tags=['0. Implemented path'])
 def root():
     return "Hello! This is our clinic's microservice for storing and updating information for dogs!"
 
 
-# 3. Реализован путь /post
-@app.post("/post", response_model=List[Timestamp])
-def get_post():
-    id_max = 0
-    for i in post_db:
-        if i.id > id_max:
-            id_max = i.id
-
-    new_id = id_max + 1
+@app.post("/post", response_model=Timestamp,
+          tags=['1. Create a new timestamp']
+          )
+def get_post(id_usr: int):
     current_time = int(datetime.now().timestamp())
-    new_usr = Timestamp(id=new_id, timestamp=current_time)
+    new_usr = Timestamp(id=id_usr, timestamp=current_time)
     post_db.extend([new_usr])
-    return [new_usr]
+    return new_usr
 
 
-# 4. Реализована запись собак
-@app.post("/dog", response_model=List[Dog])
+@app.post("/dog", response_model=Dog,
+          tags=['2. Create a new dog']
+          )
 def create_dog(name: str, kind: DogType):
     new_pk = max(dogs_db.keys()) + 1
     new_dog = Dog(name=name, pk=new_pk, kind=kind)
     dogs_db[new_pk] = new_dog
-    return [new_dog]
+    return new_dog
 
 
-# 5. Реализовано получение списка собак
-@app.get("/dogs_list")
-def get_dogs_list(limit: int = 1):
+@app.get("/dogs_list", response_model=List[Dog],
+         tags=['3. Get a list of all dogs']
+         )
+def get_dogs_list(limit: int = 3):
     return list(dogs_db.values())[:limit]
 
 
-# 6. Реализовано получение собаки по id
-@app.get("/dog/{pk}", response_model=List[Dog])
+@app.get("/dog/{pk}", response_model=List[Dog],
+         tags=['4. Get a dog by its pk']
+         )
 def get_dog_by_pk(dog_id: int):
+    if dog_id not in dogs_db:
+        raise HTTPException(status_code=404, detail='This pk is not exist')
     return [val for key, val in dogs_db.items() if key == dog_id]
 
 
 # 7. Реализовано получение собак по типу
-@app.get("/dog/")
-def get_dogs(dogType: DogType):
-    current_dogs = []
+@app.get("/dog/", response_model=List[Dog],
+         tags=['5. Get a list of dogs by breed']
+         )
+def get_dogs(dogType: DogType = None):
+    if dogType is None:
+        return list(dogs_db.values())
 
-    for key, val in dogs_db.items():
+    current_dogs = []
+    for _, val in dogs_db.items():
         if val.kind == dogType:
             current_dogs.append(val)
     return current_dogs
 
 
-# 8. Реализовано обновление собаки по id
-@app.patch("/dog/{pk}", response_model=List[Dog])
-def update_dog(pk: int, new_name: str):
-    current_dog = []
-    for key, val in dogs_db.items():
-        if val.pk == pk:
-            val.name = new_name
-            current_dog.append(val)
-    return current_dog
+@app.patch("/dog/{pk}", response_model=Dog,
+           tags=['6. Update a dog by its pk']
+           )
+def update_dog(pk: int, dog: Dog):
+    if pk not in dogs_db:
+        raise HTTPException(status_code=404, detail='This pk is not exist')
+    if pk != dog.pk:
+        raise HTTPException(status_code=404, detail='Pk does not match index')
+    dogs_db[pk] = dog
+    return dog
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
