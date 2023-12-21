@@ -3,7 +3,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-SQLALCHEMY_DATABASE_URL = "postgresql+psycopg2://gwen@localhost/db_postgres"
+SQLALCHEMY_DATABASE_URL = ('postgresql://astashovivl:uCAG29k5zuu6NXYtOg123tUar4YjX4Af@dpg-cm256n6n7f5s73es9d0g-a'
+                           '.frankfurt-postgres.render.com/db_postgres_n2ov')
 
 dogs_data = {
     'name': ['Bob', 'Marli', 'Snoopy', 'Rex', 'Pongo', 'Tillman', 'Uga'],
@@ -27,7 +28,6 @@ for data_name, data in zip(
 ):
     df = pd.DataFrame.from_dict(data)
     df.to_sql(data_name, engine, index=False, if_exists='replace')
-
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 

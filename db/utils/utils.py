@@ -33,13 +33,13 @@ def update_dog(db: Session, dog: schemas.Dog):
     return db_dog
 
 
-# def create_timestamp(db: Session, timestamp: schemas.Timestamp):
-#     db_timestamp = models.Timestamp(**timestamp.model_dump())
-#     db.add(db_timestamp)
-#     db.commit()
-#     db.refresh(db_timestamp)
-#     return db_timestamp
-#
-#
-# def get_timestamp(db: Session, timestamp_id: int):
-#     return db.query(models.Timestamp).filter(models.Timestamp.id == timestamp_id).first()
+def create_timestamp(db: Session, timestamp: schemas.Timestamp):
+    db_timestamp = models.Timestamp(**timestamp.model_dump())
+    db.add(db_timestamp)
+    db.commit()
+    db.refresh(db_timestamp)
+    return db_timestamp
+
+
+def get_timestamp(db: Session, timestamp_id: int):
+    return db.query(models.Timestamp).filter(models.Timestamp.id == timestamp_id).first()
