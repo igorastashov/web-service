@@ -42,4 +42,6 @@ def create_timestamp(db: Session, timestamp: schemas.Timestamp):
 
 
 def get_timestamp(db: Session, timestamp_id: int):
-    return db.query(models.Timestamp).filter(models.Timestamp.id == timestamp_id).first()
+    return (
+        db.query(models.Timestamp).filter(models.Timestamp.id == timestamp_id).first()
+    )
