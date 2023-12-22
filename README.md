@@ -81,4 +81,4 @@ Timestamp
 
 ## (A) Acknowledgments
 
-This repository borrows partially from [Gwendolyn Faraday](https://github.com/gwenf/python-polls).
+This repository borrows partially from [Артём Шумейко](https://www.youtube.com/watch?v=_1H1qsNqxwM&list=PLeLN0qH0-mCVQKZ8-W1LhxDcVlWtTALCS&index=16) and [Gwendolyn Faraday](https://github.com/gwenf/python-polls).
