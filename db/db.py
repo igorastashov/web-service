@@ -1,10 +1,19 @@
+import os
 import pandas as pd
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from dotenv import load_dotenv
 
-SQLALCHEMY_DATABASE_URL = ('postgresql://astashovivl:uCAG29k5zuu6NXYtOg123tUar4YjX4Af@dpg-cm256n6n7f5s73es9d0g-a'
-                           '.frankfurt-postgres.render.com/db_postgres_n2ov')
+
+MY_DB = 'db_postgres_n2ov'
+MY_USER = 'astashovivl'
+HOST_NAME = 'dpg-cm256n6n7f5s73es9d0g-a.frankfurt-postgres.render.com'
+
+# Load .env file
+load_dotenv()
+
+SQLALCHEMY_DB_URL = f"postgresql+psycopg2://{MY_USER}:{os.getenv('MY_PASS')}@{HOST_NAME}/{MY_DB}"
 
 dogs_data = {
     'name': ['Bob', 'Marli', 'Snoopy', 'Rex', 'Pongo', 'Tillman', 'Uga'],
@@ -18,7 +27,7 @@ timestamps_data = {
 }
 
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args={}
+    SQLALCHEMY_DB_URL, connect_args={}
 )
 
 # populate database with existing data
