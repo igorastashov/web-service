@@ -7,13 +7,13 @@ Astashov I.V., 2023.
 This service was developed in accordance with the assignment of the
 DevOps course during study at [HSE Master's Programme](https://www.hse.ru/en/ma/mlds/).
 
-**If you would like to use the deployed service on Render see [(3) Quick start](https://github.com/igorastashov/web-service/blob/dev/README.md#quick-start).**
+**If you would like to use the deployed service on Render see [(3) Quick start](https://github.com/igorastashov/web-service/blob/dev/README.md#3-quick-start).**
 
 
 ## (1) Task
 
 The clinic needs a microservice to store and update information for dogs 
-in accordance with the [documentation]() in OpenAPI format.
+in accordance with the [documentation](https://github.com/igorastashov/web-service/blob/dev/clinic.yaml) in OpenAPI format.
 
 
 ## (2) Technologies
@@ -27,8 +27,7 @@ in accordance with the [documentation]() in OpenAPI format.
 
 ## (3) Quick start
 
-The service is deployed on Render and available at [https://fastapi-vet-service.onrender.com]()
-Please refer to the [service documentation]() for the available operations.
+The service is deployed on Render. See the documentation at the [link](https://fastapi-vet-service-with-db-postgres.onrender.com/docs).
 
 
 ## (4) Local Development
