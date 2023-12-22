@@ -9,7 +9,6 @@ description = """
 This service was developed in accordance with the assignment of the
 DevOps course during study at [HSE Master's Programme](https://www.hse.ru/en/ma/mlds/).
 
-## Available operations
 
 In this app you can:
 1. See basic information about the app;
@@ -17,7 +16,7 @@ In this app you can:
 3. Create a new dog;
 4. Get a list of all dogs or list of dogs by type;
 5. Get a dog by its pk;
-6. Update a dog by its pk;
+6. Update a dog by its pk.
 """
 
 tags = [{"name": "Available operations"}]
