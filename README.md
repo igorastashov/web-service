@@ -32,12 +32,18 @@ The service is deployed on Render. See the documentation at the [link](https://f
 
 ## (4) Local Development
 
-1. Clone this repo and `cd` into repo directory
-2. Create a virtual environment: `python -m venv venv`
-3. Activate a virtual environment: `source venv/Scripts/activate`
-4. Install dependencies: `pip install -r requirements.txt`
-5. Run the server: `uvicorn main:app --reload`
-6. Access swagger at: http://127.0.0.1:8000/docs
+1. Clone this repo and `cd` into repo directory;
+2. Create a virtual environment: `python -m venv venv`;
+3. Activate a virtual environment: `source venv/Scripts/activate`;
+4. Install dependencies: `pip install -r requirements.txt`;
+5. Run the server: `uvicorn main:app --reload`;
+6. Access swagger at: http://127.0.0.1:8000/docs .
+
+**You can also run the app locally using Docker**
+
+1. Build the image `docker build . -t fastapi_app:latest`;
+2. Spin up the container `docker run -d -p 5555:8000 fastapi_app`;
+3. Access swagger at: http://127.0.0.1:5555/docs .
 
 
 ## (5) Schema
