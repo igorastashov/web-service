@@ -41,7 +41,7 @@ The service is deployed on Render. See the documentation at the [link](https://f
 
 **You can also run the app locally using Docker**
 
-1. Build the image `docker build . -t fastapi_app:latest`;
+1. Build the image `docker build . -t fastapi_app:latest` or use `docker pull astashoviv/fastapi_app`;
 2. Spin up the container `docker run -d -p 5555:8000 fastapi_app`;
 3. Access swagger at: http://127.0.0.1:5555/docs .
 
