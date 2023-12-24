@@ -1,3 +1,4 @@
-pipfastapi
+fastapi
 uvicorn
 pydantic
+gunicorn
