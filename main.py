@@ -10,8 +10,6 @@ description = """
 This service was developed in accordance with the assignment of the
 DevOps course during study at [HSE Master's Programme](https://www.hse.ru/en/ma/mlds/).
 
-## Available operations
-
 In this app you can:
 0. See basic information about the app;
 1. Create a new timestamp;
